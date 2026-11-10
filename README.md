@@ -28,7 +28,7 @@
 - HuggingFace 被墙 → 模型/数据走 **ModelScope** / GitHub 镜像
 - transformers **v5.x**（`torch_dtype` 改名 `dtype`、`eval_strategy` 等）
 
-一步自检（应输出 `Python 3.11.x` 和 48 passed）：
+一步自检（应输出 `Python 3.11.x`；未下载数据时是 `46 passed, 2 skipped`，下载 SROIE 后是 `48 passed`）：
 
 ```bash
 py -3.11 -V
@@ -52,7 +52,7 @@ py -3.11 -m src.inference.engine_hf --image data/raw/sroie/img/000.jpg     # 原
 
 ```
 vlm-doc-deploy/
-├── data/               # raw: SROIE 图片+标注；processed: 统一格式化
+├── data/               # raw: SROIE 图片+标注；processed: 统一格式化（gitignore）
 ├── models/             # ModelScope 下载的权重（gitignore）
 ├── src/
 │   ├── data/           # 数据加载/预处理（SROIE）
@@ -107,7 +107,8 @@ py -3.11 src/utils/model_download.py --model Qwen/Qwen2.5-VL-3B-Instruct
 py -3.11 -m src.data.download_sroie                        # SROIE 624 张
 # XFUND 中文表单（跨域泛化，GitHub Release 下载，见 scripts/eval_xfund.py 头部说明）
 
-# 推理
+# 推理（合成样例图，无需先下载数据集；也可换成 data/raw/sroie/img/000.jpg）
+py -3.11 src/utils/sample_ticket.py                                        # 生成 data/raw/sample_ticket.png
 py -3.11 -m src.inference.engine_hf --image data/raw/sample_ticket.png
 py -3.11 -m scripts.run_w1_smoke --num_sroie 5             # 冒烟测试
 
@@ -130,4 +131,4 @@ py -3.11 -m pytest
 - RTX 5060 Laptop **8GB**（Blackwell sm_120），torch 2.11 + CUDA 12.8
 - HuggingFace 被墙 → 模型走 **ModelScope**、数据走 **GitHub codeload**（`raw.githubusercontent.com` 也被墙）
 - transformers **v5.x**（`torch_dtype`→`dtype`）；`AutoProcessor` 需 **torchvision**
-- **量化工具链**：vLLM/autoawq 在 Windows+Blackwell 不可用 → 用 bitsandbytes NF4（详见 §13 交接文档）
+- **量化工具链**：vLLM/autoawq 在 Windows+Blackwell 不可用 → 用 bitsandbytes NF4（详见 `docs/技术手册.md`）
