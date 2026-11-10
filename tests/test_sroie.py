@@ -2,14 +2,27 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
-from src.data.sroie import FIELDS, load_manifest, load_sample
+import pytest
+
+from src.data.sroie import DEFAULT_RAW_DIR, FIELDS, load_manifest, load_sample
+
+# 仓库不含 data/（.gitignore 排除），纯克隆跑测试时这两个用例会因缺 manifest 而失败。
+# 没有数据就显式 skip，而不是红一片——需要真跑时先下载：
+#   py -3.11 -m src.data.download_sroie
+SROIE_MANIFEST = Path(DEFAULT_RAW_DIR) / "sroie" / "manifest.json"
+needs_sroie_data = pytest.mark.skipif(
+    not SROIE_MANIFEST.exists(),
+    reason=f"缺少 {SROIE_MANIFEST}；先运行 py -3.11 -m src.data.download_sroie",
+)
 
 
 def test_fields_schema():
     assert FIELDS == ["company", "date", "address", "total"]
 
 
+@needs_sroie_data
 def test_load_manifest_has_samples():
     manifest = load_manifest()
     assert len(manifest) >= 50  # 至少是 subset 下载的 50 张
@@ -18,6 +31,7 @@ def test_load_manifest_has_samples():
     assert first["id"] == "000"
 
 
+@needs_sroie_data
 def test_load_sample_returns_image_and_label():
     manifest = load_manifest()
     img, label = load_sample(manifest[0])

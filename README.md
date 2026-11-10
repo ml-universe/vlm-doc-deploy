@@ -40,9 +40,13 @@ py -3.11 -m pytest tests/ -q
 ```bash
 py -3.11 -m pip install -e .                      # 可编辑安装，使 from src.xxx import ... 全局可用
 
-py -3.11 src/utils/model_download.py --model Qwen/Qwen2.5-VL-3B-Instruct   # 下载模型到 models/
-py -3.11 -m src.inference.engine_hf --image data/raw/sample_ticket.png      # 原生推理冒烟
+py -3.11 src/utils/model_download.py --model Qwen/Qwen2.5-VL-3B-Instruct   # 下载模型到 models/（约 7GB）
+py -3.11 -m src.data.download_sroie                                       # 下载 SROIE 624 张到 data/raw/sroie/
+py -3.11 -m src.inference.engine_hf --image data/raw/sroie/img/000.jpg     # 原生推理冒烟
 ```
+
+> 仓库里**不含** `data/` 与 `models/`（体积原因，已被 `.gitignore` 排除）。上面的下载命令跑完后
+> `pytest` 才会全绿（缺数据时依赖 SROIE 的 2 个用例会显式 skip，不会报错）。
 
 ## 目录结构
 
