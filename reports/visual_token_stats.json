@@ -1,0 +1,19 @@
+{
+  "n": 624,
+  "text_only_tokens": 106,
+  "visual_tokens_default": {
+    "min": 373,
+    "max": 16307,
+    "mean": 3623.0,
+    "median": 1821.0,
+    "n_gt_10000": 84
+  },
+  "visual_tokens_2m": {
+    "min": 373,
+    "max": 2669,
+    "mean": 1775.7,
+    "median": 1821.0,
+    "n_gt_3000": 0
+  },
+  "total_reduction_ratio": 0.5099
+}

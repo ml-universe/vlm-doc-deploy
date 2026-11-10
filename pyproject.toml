@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlm-doc-deploy"
+version = "0.1.0"
+description = "多模态文档理解模型边缘部署：Qwen2.5-VL 文档/票据结构化抽取 + 量化/引擎/并发优化（RTX 5060 8GB）"
+requires-python = ">=3.10"
+readme = "README.md"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q"

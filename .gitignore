@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# 大型产物（可重新生成）
+models/
+checkpoints/
+
+# reports 下的 .md/.json/.png 是交付物（报告数字），纳入版本管理；仅忽略运行日志
+reports/*.log
+# 每样本推理中间产物（可重新生成，随基准增长）
+reports/preds_*.json
+# locust 压测原始 CSV（汇总数字已在 w4_serving.md，原始 CSV 可重新生成）
+reports/w4_loadtest_*.csv
+
+# 数据（可重新下载/处理；如需版本管理可取消忽略）
+data/raw/
+data/processed/
+
+# 编辑器/系统
+.idea/
+.vscode/
+.ipynb_checkpoints/
+.DS_Store
+
+# 密钥（严禁提交）
+.env
+.env.*
+# 但 .env.example 是应提交的模板（不含密钥），上面的 .env.* 会误伤它，需排除
+!.env.example

@@ -1,0 +1,46 @@
+{
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "dtype": "bf16",
+  "engine": "hf-transformers",
+  "loaded_gpu_allocated_mb": 6132.3,
+  "loaded_gpu_reserved_mb": 6192.0,
+  "model_footprint_mb": 7161.4,
+  "num_samples": 3,
+  "latency_s_mean": 15.755,
+  "latency_s_median": 16.383,
+  "gpu_peak_mb_mean": 6279.8,
+  "gpu_peak_mb_max": 6291.6,
+  "throughput_tok_s_mean": 1.86,
+  "details": [
+    {
+      "id": "000",
+      "latency_s": 16.383,
+      "output_chars": 200,
+      "output_tokens_approx": 30,
+      "throughput_tok_s": 1.83,
+      "gpu_allocated_mb": 6141.4,
+      "gpu_reserved_mb": 6256.0,
+      "gpu_peak_mb": 6291.6
+    },
+    {
+      "id": "001",
+      "latency_s": 13.332,
+      "output_chars": 175,
+      "output_tokens_approx": 24,
+      "throughput_tok_s": 1.8,
+      "gpu_allocated_mb": 6141.4,
+      "gpu_reserved_mb": 6248.0,
+      "gpu_peak_mb": 6278.6
+    },
+    {
+      "id": "002",
+      "latency_s": 17.549,
+      "output_chars": 236,
+      "output_tokens_approx": 34,
+      "throughput_tok_s": 1.94,
+      "gpu_allocated_mb": 6141.4,
+      "gpu_reserved_mb": 6248.0,
+      "gpu_peak_mb": 6269.1
+    }
+  ]
+}

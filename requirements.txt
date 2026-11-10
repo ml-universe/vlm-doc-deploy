@@ -1,0 +1,31 @@
+# 核心推理依赖
+# torch/torchvision 需匹配 CUDA 12.8（Blackwell sm_120），用 --no-deps 安装避免覆盖：
+#   pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu128 --no-deps
+torch==2.11.0
+torchvision==0.26.0
+transformers>=5.0,<6.0
+modelscope>=1.39
+pillow
+
+# 权重量化（W2：bitsandbytes NF4）
+bitsandbytes>=0.50
+
+# 推理引擎 device_map（bnb4 加载 + offload 控制）
+accelerate>=1.14
+
+# 部署（W4：FastAPI + uvicorn + pydantic 校验）
+fastapi>=0.141
+uvicorn>=0.52
+pydantic>=2.0
+
+# 压测（W4：locust，纯 Python 免编译）
+locust>=2.46
+
+# 绘图（W2 Pareto 图，需显式配置中文字体）
+matplotlib>=3.8
+
+# KV cache 量化（W3-3：hqq KIVI 风格 int 量化，可选/实验性）
+hqq>=0.2.8
+
+# 说明：vLLM / autoawq 在 Windows+Blackwell 上装不了（无 wheel / sm_120 不兼容），
+# 故不在此列出；本项目量化方案是 bitsandbytes NF4（见 reports/w2_quant_stage2.md）。
